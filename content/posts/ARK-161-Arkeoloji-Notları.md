@@ -1,6 +1,6 @@
 +++
 date = '2025-10-28T16:57:15+03:00'
-draft = true
+draft = false
 title = 'ARK 161 Arkeoloji Notları'
 +++
 ## Arkeolojiye Giriş: Geçmişi Yeniden İnşa Etmek ve Antik Çağ'daki Kökenleri
