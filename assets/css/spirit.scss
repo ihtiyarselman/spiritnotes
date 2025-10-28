@@ -1,0 +1,208 @@
+/* === YENİ ÖZELLİK: SMOOTH SCROLLING === */
+html {
+  scroll-behavior: smooth;
+}
+
+/* === YENİ ÖZELLİK: Kaydırılan başlığın üstte kalmaması için === */
+h2, h3, h4, h5, h6 {
+  scroll-margin-top: 20px; /* Başlığa atlandığında üstten 20px boşluk bırakır */
+}
+
+/* === CYBERPUNK PALETİ (Görsellerden esinlenildi) === */
+:root {
+  --bg-color: #0D020D;
+  --card-color: #1a0f1a;
+  --card-color-rgb: 26, 15, 26; /* CAM EFEKTİ İÇİN RGB DEĞERİ */
+  --text-color: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --accent-red: #ff003c;
+  --accent-pink: #ff00ff;
+  --accent-blue: #00ffff;
+  --accent-green: #00ff00;
+}
+
+/* === TEMEL KURULUM === */
+* { box-sizing: border-box; }
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+
+  /* === YENİ WALLPAPER VE GÜRÜLTÜ (GLITCH) AYARI === */
+  background-image: 
+    /* 1. Katman: Ekran Paraziti (Glitch) */
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2" viewBox="0 0 2 2"><rect width="1" height="1" fill="rgba(255,255,255,0.05)" /><rect x="1" y="1" width="1" height="1" fill="rgba(255,255,255,0.05)" /></svg>'),
+    /* 2. Katman: Yazıların okunması için hafif koyu filtre */
+    linear-gradient(rgba(13, 2, 13, 0.7), rgba(13, 2, 13, 0.7)),
+    /* 3. Katman: Bizim wallpaper'ımız */
+    url('/img/bg2.png');
+
+  background-size: 2px 2px, cover, cover; 
+  background-position: 0 0, center center, center center;
+  background-attachment: fixed, fixed, fixed; 
+}
+
+/* === ANA YAPI === */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* === HEADER (Site Başlığı) === */
+.site-header {
+  text-align: center;
+  padding: 40px 20px;
+
+  .site-title {
+    font-size: 3em;
+    margin: 0;
+
+    a {
+      color: var(--accent-pink);
+      text-decoration: none;
+      text-shadow: 0 0 5px var(--accent-pink), 0 0 10px var(--accent-pink), 0 0 20px var(--accent-red);
+    }
+  }
+}
+
+/* === ANA SAYFA (KART LİSTESİ) === */
+.page-title {
+    color: var(--text-color);
+    border-bottom: 2px solid var(--accent-red);
+    padding-bottom: 10px;
+}
+
+.post-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.card {
+  display: block;
+  background-color: rgba(var(--card-color-rgb), 0.7); /* YARI SAYDAMLIK */
+  backdrop-filter: blur(5px); /* CAM EFEKTİ */
+  border: 1px solid var(--accent-blue);
+  padding: 25px;
+  text-decoration: none;
+  color: var(--text-color);
+  border-radius: 8px;
+
+  box-shadow: 0 0 10px rgba(var(--accent-blue), 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+  h2 {
+    color: var(--accent-red);
+    margin-top: 0;
+  }
+
+  p {
+    color: var(--text-secondary);
+  }
+}
+
+/* === HOVER EFEKTİ === */
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: var(--accent-pink);
+  box-shadow: 0 0 20px rgba(var(--accent-pink), 0.6);
+}
+
+/* === YAZI SAYFASI (ToC ile) === */
+.post-single {
+  .post-title {
+    color: var(--accent-red);
+    font-size: 2.5em;
+  }
+
+  .post-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .post-content {
+    line-height: 1.7;
+    background-color: rgba(var(--card-color-rgb), 0.7); /* YARI SAYDAMLIK */
+    backdrop-filter: blur(5px); /* CAM EFEKTİ */
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid var(--accent-pink);
+
+    a { color: var(--accent-blue); }
+    h2 { color: var(--accent-pink); }
+    h3 { color: var(--accent-green); }
+
+    code {
+      background: var(--bg-color);
+      color: var(--accent-green);
+      padding: 3px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--accent-green);
+    }
+  }
+}
+
+/* === İçindekiler Tablosu (ToC) - TÜM STİLLER === */
+.toc-container {
+  background-color: rgba(var(--card-color-rgb), 0.7); /* YARI SAYDAMLIK */
+  backdrop-filter: blur(5px); /* CAM EFEKTİ */
+  border: 1px solid var(--accent-green);
+  border-radius: 8px;
+  padding: 20px;
+
+  box-shadow: 0 0 10px rgba(var(--accent-green), 0.3);
+
+  h3 {
+    color: var(--accent-green);
+    margin-top: 0;
+    border-bottom: 1px solid var(--accent-green);
+    padding-bottom: 10px;
+    font-size: 1.2em;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  li a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: color 0.2s ease, text-shadow 0.2s ease, padding-left 0.2s ease;
+    display: block;
+    padding: 6px 0 6px 5px;
+    border-left: 3px solid transparent;
+  }
+
+  li a:hover {
+    color: var(--accent-pink);
+    text-shadow: 0 0 5px var(--accent-pink);
+    padding-left: 10px;
+    border-left: 3px solid var(--accent-pink);
+  }
+}
+
+/* === Masaüstü Ekranlar için Ayarlamalar === */
+@media (min-width: 768px) {
+  .post-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .post-single .post-layout {
+    grid-template-columns: 3fr 1fr;
+  }
+
+  .toc-container {
+    /* Sadece pozisyon ayarları burada (sticky) */
+    position: sticky;
+    top: 20px;
+    max-height: 90vh; /* Ekranın %90'ını geçmesin */
+    overflow-y: auto; /* Gerektiğinde kaydır */
+  }
+}

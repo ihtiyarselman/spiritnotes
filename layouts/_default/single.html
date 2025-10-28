@@ -1,0 +1,25 @@
+{{/* --- Ana şablonu (baseof.html) devralıyoruz --- */}}
+{{ define "main" }}
+
+    <article class="post-single">
+        <h1 class="post-title">{{ .Title }}</h1>
+
+        <div class="post-layout">
+            
+            {{/* --- Sütun 1: Yazı İçeriği --- */}}
+            <div class="post-content">
+                {{ .Content }}
+            </div>
+            
+            {{/* --- Sütun 2: İçindekiler Tablosu --- */}}
+            {{ if .TableOfContents }}
+            <aside class="toc-container">
+                <h3>İçindekiler</h3>
+                {{ .TableOfContents }}
+            </aside>
+            {{ end }}
+
+        </div>
+    </article>
+
+{{ end }}

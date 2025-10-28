@@ -1,0 +1,34 @@
+{{/* --- Ana şablonu (baseof.html) devralıyoruz --- */}}
+{{ define "main" }}
+
+    {{/* --- Değişkenleri ayarlıyoruz --- */}}
+    {{ $pages := .Pages }}
+    {{ $title := .Title }}
+
+    {{/* --- EĞER BU ANA SAYFA İSE ('/') --- */}}
+    {{ if .IsHome }}
+        {{/* Başlığı "Son Yazılar" olarak değiştir */}}
+        {{ $title = "Son Yazılar" }}
+        {{/* Sayfaları, "posts" bölümündeki sayfalardan al */}}
+        {{ $pages = (site.GetPage "posts").Pages }}
+
+    {{ end }}
+
+
+    <h1 class="page-title">{{ $title }}</h1>
+
+    <div class="post-list">
+        {{ $paginator := .Paginate $pages }}
+        {{ range $paginator.Pages }}
+
+            {{/* --- Kart: Sadece Başlık ve Tarih --- */}}
+            <a href="{{ .Permalink }}" class="card">
+                <h2>{{ .Title }}</h2>
+                {{/* ÖZET KISMI İSTEĞİNİZ ÜZERİNE KALDIRILDI */}}
+                <time style="color: var(--text-secondary);">{{ .Date.Format "2 January 2006" }}</time>
+            </a>
+
+        {{ end }}
+    </div>
+
+{{ end }}

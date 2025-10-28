@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    
+    {{/* --- Cyberpunk CSS'imizi Hugo Pipes ile işleyip bağlıyoruz --- */}}
+    {{ $styles := resources.Get "css/spirit.scss" | toCSS | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.Permalink }}">
+</head>
+<body>
+
+    <header class="site-header">
+        <h1 class="site-title"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
+    </header>
+
+    <main class="container">
+        {{/* --- 'list.html' veya 'single.html' içeriği buraya gelecek --- */}}
+        {{ block "main" . }}
+        {{ end }}
+    </main>
+
+    <footer class="site-footer" style="text-align: center; padding: 40px 20px; color: var(--text-secondary); font-size: 0.9em;">
+        &copy; {{ now.Format "2006" }} {{ .Site.Title }}. Tüm hakları saklıdır.
+    </footer>
+
+</body>
+</html>
