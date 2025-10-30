@@ -3,24 +3,23 @@
 
     <article class="post-single">
         <h1 class="post-title">{{ .Title }}</h1>
-	
+
 	<div class="post-layout">
-            
-            {{/* --- Sütun 1: İçindekiler Tablosu (ARTIK İLK SIRADA) --- */}}
-            {{ if .TableOfContents }}
-            <aside class="toc-container">
-                <h3>İçindekiler</h3>
-                {{ .TableOfContents }}
-            </aside>
-            {{ end }}
 
-            {{/* --- Sütun 2: Yazı İçeriği (ARTIK İKİNCİ SIRADA) --- */}}
-            <div class="post-content">
-                {{ .Content }}
-            </div>
+        {{/* --- Sütun 1: İçindekiler (Mobilde üste gelir) --- */}}
+        {{ if .TableOfContents }}
+        <aside class="toc-container">
+            <h3>İçindekiler</h3>
+            {{ .TableOfContents }}
+        </aside>
+        {{ end }}
 
+        {{/* --- Sütun 2: Yazı İçeriği (Mobilde alta gelir) --- */}}
+        <div class="post-content">
+            {{ .Content }}
         </div>
 
+    </div>
     </article>
 
 {{ end }}

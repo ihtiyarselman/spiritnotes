@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ARK-161-Arkeoloji-Notları.md",
+                "file": "spirit-notes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ARK-161-Arkeoloji-Notları"
+              "title": "spirit-notes"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "22df4fde86025b34",
@@ -171,6 +172,8 @@
   },
   "active": "9aaf18393fb08c54",
   "lastOpenFiles": [
+    "bash-script.md",
+    "spirit-notes.md",
     "ilk-yazim.md",
     "ARK-161-Arkeoloji-Notları.md"
   ]

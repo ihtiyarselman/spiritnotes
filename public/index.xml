@@ -6,21 +6,14 @@
     <description>Recent content on Spirit Notes</description>
     <generator>Hugo</generator>
     <language>tr-tr</language>
-    <lastBuildDate>Tue, 28 Oct 2025 16:57:15 +0300</lastBuildDate>
+    <lastBuildDate>Thu, 30 Oct 2025 17:20:45 +0300</lastBuildDate>
     <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>ARK 161 Arkeoloji Notları</title>
-      <link>//localhost:1313/posts/ark-161-arkeoloji-notlar%C4%B1/</link>
-      <pubDate>Tue, 28 Oct 2025 16:57:15 +0300</pubDate>
-      <guid>//localhost:1313/posts/ark-161-arkeoloji-notlar%C4%B1/</guid>
-      <description>&lt;h2 id=&#34;arkeolojiye-giriş-geçmişi-yeniden-inşa-etmek-ve-antik-çağdaki-kökenleri&#34;&gt;Arkeolojiye Giriş: Geçmişi Yeniden İnşa Etmek ve Antik Çağ&amp;rsquo;daki Kökenleri&lt;/h2&gt;&#xA;&lt;p&gt;ARK 161 dersimizin ilk haftası (25.09.2025), arkeoloji disiplinine genel bir bakış atarak başladı. Bu hafta, arkeolojinin ne olduğu, diğer bilim dallarıyla ilişkisi ve geçmişe yönelik merakımızın Antik Çağ&amp;rsquo;daki ilk tezahürlerini inceledik.&lt;/p&gt;&#xA;&lt;h2 id=&#34;arkeoloji-nedir-temel-kavramlar-ve-yakın-ilişkiler&#34;&gt;Arkeoloji Nedir? Temel Kavramlar ve Yakın İlişkiler&lt;/h2&gt;&#xA;&lt;p&gt;Arkeoloji, temel olarak arazide yapılan keşifler kadar, kuramlarla da yönetilen bir bilim dalıdır. Arkeolojik çalışmalar, geçmişin tutarlı (ya da bir dizi tutarlı) resmini oluşturmayı amaçlar ve bu resim maddi kalıntılardan oluşan sağlam bir temelde yaratılmaya çalışılır.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>İlk Yazım</title>
-      <link>//localhost:1313/posts/ilk-yazim/</link>
-      <pubDate>Tue, 28 Oct 2025 16:45:00 +0300</pubDate>
-      <guid>//localhost:1313/posts/ilk-yazim/</guid>
-      <description>Bu, kendi özel temamızla oluşturduğumuz ilk yazının özetidir.</description>
+      <title>Spirit Notes</title>
+      <link>//localhost:1313/posts/spirit-notes/</link>
+      <pubDate>Thu, 30 Oct 2025 17:20:45 +0300</pubDate>
+      <guid>//localhost:1313/posts/spirit-notes/</guid>
+      <description>&lt;h3 id=&#34;bu-siteyi-kurmamın-sebebi-nedir&#34;&gt;Bu siteyi kurmamın sebebi nedir?&lt;/h3&gt;&#xA;&lt;p&gt;Ücretsiz senkronizasyon &lt;em&gt;sunan&lt;/em&gt; ve bütün problemlerime cevap bulan bir not uygulaması bulamamamdan kaynaklıydı. Bu beni ücretsiz, notlarımı yükleyebildiğim, kişiselleştirebileceğim bir site yapmaya itti.&lt;/p&gt;&#xA;&lt;h3 id=&#34;bu-siteyi-nasıl-kurdum&#34;&gt;Bu siteyi nasıl kurdum?&lt;/h3&gt;&#xA;&lt;p&gt;Her zaman Linux distrolarından birine geçmek istemiştim. Madem hafif kodlama öğrenmem lazım diyerekten, bir de Windows kasmaları da eklenince bilgisayarıma Arch Linux tabanlı &lt;strong&gt;CachyOS&lt;/strong&gt; distrosunu kurdum. Linux&amp;rsquo;ta terminal kullanarak site kurmanın daha kolay olacağını düşündüm.&lt;/p&gt;&#xA;&lt;p&gt;Arch Linux, Debian/Ubuntu tabanlı distroların kullandığı paket yöneticilerini (package managers) kullanmıyor. &lt;strong&gt;&lt;code&gt;pacman&lt;/code&gt;&lt;/strong&gt; ve &lt;strong&gt;&lt;code&gt;yay&lt;/code&gt;&lt;/strong&gt; kullanıyor.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

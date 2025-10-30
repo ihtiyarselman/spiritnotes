@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="tr-tr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spirit Notes | Spirit Notes</title>
+    
+    
+    
+    <link rel="stylesheet" href="//localhost:1313/css/spirit.min.b2598e7838d6c839f2906e07b11793570d3fc5f51088a8b0233c1e3f60b88bb3.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <h1 class="site-title"><a href="//localhost:1313/">Spirit Notes</a></h1>
+    </header>
+
+    <main class="container">
+        
+        
+
+    <article class="post-single">
+        <h1 class="post-title">Spirit Notes</h1>
+
+	<div class="post-layout">
+
+        
+        
+        <aside class="toc-container">
+            <h3>İçindekiler</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#bu-siteyi-kurmamın-sebebi-nedir">Bu siteyi kurmamın sebebi nedir?</a></li>
+        <li><a href="#bu-siteyi-nasıl-kurdum">Bu siteyi nasıl kurdum?</a></li>
+        <li><a href="#ilk-adımımız-hugo">İlk adımımız Hugo</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </aside>
+        
+
+        
+        <div class="post-content">
+            <h3 id="bu-siteyi-kurmamın-sebebi-nedir">Bu siteyi kurmamın sebebi nedir?</h3>
+<p>Ücretsiz senkronizasyon <em>sunan</em> ve bütün problemlerime cevap bulan bir not uygulaması bulamamamdan kaynaklıydı. Bu beni ücretsiz, notlarımı yükleyebildiğim, kişiselleştirebileceğim bir site yapmaya itti.</p>
+<h3 id="bu-siteyi-nasıl-kurdum">Bu siteyi nasıl kurdum?</h3>
+<p>Her zaman Linux distrolarından birine geçmek istemiştim. Madem hafif kodlama öğrenmem lazım diyerekten, bir de Windows kasmaları da eklenince bilgisayarıma Arch Linux tabanlı <strong>CachyOS</strong> distrosunu kurdum. Linux&rsquo;ta terminal kullanarak site kurmanın daha kolay olacağını düşündüm.</p>
+<p>Arch Linux, Debian/Ubuntu tabanlı distroların kullandığı paket yöneticilerini (package managers) kullanmıyor. <strong><code>pacman</code></strong> ve <strong><code>yay</code></strong> kullanıyor.</p>
+<p><code>pacman</code> ve <code>yay</code> arasındaki fark:</p>
+<ul>
+<li>
+<p><code>pacman</code>, <strong>resmi</strong> paket yöneticisidir. Arch&rsquo;ın resmi depolarındaki yazılımları kurar.</p>
+</li>
+<li>
+<p><code>yay</code> ise bir <strong>AUR Yardımcısıdır</strong>. AUR (Arch User Repository) yani &ldquo;Arch Kullanıcı Deposu&rdquo; demektir. Arch kullanıcıları topluluğu tarafından binlerce ekstra paketi (resmi olmayan, beta sürümler) içerir.</p>
+</li>
+</ul>
+<p><code>yay</code> kullanarak aşağıdaki yazılımları bilgisayarımıza yükledik:</p>
+<ol>
+<li>
+<p><strong>Obsidian:</strong> Markdown formatında not tutmamı sağlayan bir note-taking app.</p>
+</li>
+<li>
+<p><strong>Hugo:</strong> Markdown formatlı notlarımı, web sitesine (<code>.html</code> formatına) dönüştüren bir motor.</p>
+</li>
+<li>
+<p><strong>Git/GitHub:</strong> Bu dosyaları kaydeden ve bulutta (GitHub) depolayan bir &ldquo;sürüm kontrol&rdquo; sistemi.</p>
+</li>
+<li>
+<p><strong>Netlify:</strong> GitHub&rsquo;daki sitemizi alıp yayınlayan ücretsiz bir &ldquo;hosting&rdquo; hizmeti.</p>
+</li>
+</ol>
+<h3 id="ilk-adımımız-hugo">İlk adımımız Hugo</h3>
+<p>Hugo&rsquo;yu kurduktan sonra terminalde <code>hugo new site spirit-notes</code> komutunu çalıştırdık.</p>
+<p>Bu komut, temel iskeletimizi oluşturdu. <code>spirit-notes</code> diye bir klasör oluşturdu ve içine şunları koydu:</p>
+<ul>
+<li>
+<p><code>archetypes/</code>: Yeni yazı <code>.md</code> dosyaları oluştururken kullanılacak şablonlar.</p>
+</li>
+<li>
+<p><code>content/</code>: Yazılarımızın (<code>.md</code> dosyaları) yaşadığı yer.</p>
+</li>
+<li>
+<p><code>data/</code>: Veri dosyaları.</p>
+</li>
+<li>
+<p><code>layouts/</code>: <strong>Normalde boş gelir.</strong> Burası bizim &ldquo;kendi temamızı&rdquo; yaratacağımız yerdi.</p>
+</li>
+<li>
+<p><code>static/</code>: Resimler, CSS dosyaları gibi &ldquo;statik&rdquo; dosyaların yeri.</p>
+</li>
+<li>
+<p><code>themes/</code>: <strong>Normalde boş gelir.</strong> Burası başkalarının temalarını koyacağımız yerdi (ama biz bunu kullanmamaya karar verdik).</p>
+</li>
+<li>
+<p><code>hugo.toml</code>: Sitenin ana yapılandırma dosyası.</p>
+</li>
+</ul>
+<p>Sitemizi oluşturduk. Bundan sonra tema kurmamız lazımdı. Google&rsquo;a <code>hugo themes</code> yazınca onlarca tema olduğunu gördüm ama ben hiçbirini beğenemedim. Özelleştirmeye çalıştım ama problemler yaşadım. Ben de kendi temamı yapmaya karar verdim.</p>
+<ul>
+<li>
+<p><strong><code>layouts/_default/</code>:</strong> Hugo, bir tema (<code>themes/</code>) bulamadığında, HTML şablonları için otomatik olarak <code>layouts/_default/</code> klasörüne bakar. Biz de ona &ldquo;İşte senin şablonların burada!&rdquo; demiş olduk.</p>
+</li>
+<li>
+<p><strong><code>assets/</code>:</strong> Bu klasör, Hugo&rsquo;nun &ldquo;Hugo Pipes&rdquo; adını verdiği bir sistemle <strong>işlemesi (process)</strong> gereken dosyalar içindir. Bizim <code>spirit.scss</code> dosyamız gibi dosyalar buraya konur, böylece Hugo onu normal CSS&rsquo;e dönüştürebilir. (Resimler gibi <em>işlenmeyen</em> dosyalar ise <code>static/</code> klasörüne konur).</p>
+</li>
+</ul>
+<p>Bu klasörleri oluşturduk. Sonra da terminalde <code>touch layouts/_default/baseof.html</code>, <code>touch layouts/_default/list.html</code> ve <code>touch layouts/_default/single.html</code> kodlarını çalıştırıp tuğlaları dizdik.</p>
+<ol>
+<li>
+<p><strong><code>baseof.html</code> (Ana Çerçeve):</strong></p>
+<ul>
+<li>
+<p>Bu, bizim ana HTML şablonumuzdur. Sitedeki <em>her</em> sayfanın etrafını saran bir &ldquo;resim çerçevesi&rdquo; gibi düşün.</p>
+</li>
+<li>
+<p>İçinde <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code> (stil dosyalarımızı bağladığımız yer), <code>&lt;header&gt;</code> (Spirit Notes başlığı) ve <code>&lt;footer&gt;</code> (Tüm hakları saklıdır) gibi tekrar eden kodlar bulunur.</p>
+</li>
+<li>
+<p>En önemli görevi, <code>{{ block &quot;main&quot; . }}</code> adında bir &ldquo;boş alan&rdquo; tanımlamaktır.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>list.html</code> (Yazı Listesi):</strong></p>
+<ul>
+<li>
+<p>Bu dosya, ana sayfa (<code>/</code>) veya <code>posts</code> bölümü gibi bir yazı listesi görüntülendiğinde, <code>baseof.html</code>&lsquo;deki o &ldquo;boş alanın&rdquo; içine girer.</p>
+</li>
+<li>
+<p>Görevi, <code>range</code> komutuyla tüm yazıları dolaşıp (döngüye girip) bizim &ldquo;kartlarımızı&rdquo; oluşturmaktır.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>single.html</code> (Tekil Yazı):</strong></p>
+<ul>
+<li>
+<p>Bu dosya, bir yazının <em>kendisine</em> tıkladığımızda <code>baseof.html</code>&lsquo;deki &ldquo;boş alanın&rdquo; içine girer.</p>
+</li>
+<li>
+<p>Görevi, yazının başlığını (<code>.Title</code>), asıl içeriğini (<code>.Content</code>) ve İçindekiler Tablosu&rsquo;nu (<code>.TableOfContents</code>) göstermektir.</p>
+</li>
+</ul>
+</li>
+</ol>
+
+        </div>
+
+    </div>
+    </article>
+
+
+    </main>
+
+    <footer class="site-footer" style="text-align: center; padding: 40px 20px; color: var(--text-secondary); font-size: 0.9em;">
+        
+    </footer>
+
+</body>
+</html>

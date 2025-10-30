@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="tr-tr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bash Script | Spirit Notes</title>
+    
+    
+    
+    <link rel="stylesheet" href="//localhost:1313/css/spirit.min.b2598e7838d6c839f2906e07b11793570d3fc5f51088a8b0233c1e3f60b88bb3.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <h1 class="site-title"><a href="//localhost:1313/">Spirit Notes</a></h1>
+    </header>
+
+    <main class="container">
+        
+        
+
+    <article class="post-single">
+        <h1 class="post-title">Bash Script</h1>
+
+	<div class="post-layout">
+
+        
+        
+        <aside class="toc-container">
+            <h3>İçindekiler</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#adım-1-en-basit-başlangıç-echo">Adım 1: En Basit Başlangıç (<code>echo</code>)</a></li>
+    <li><a href="#adım-2-gerçek-veri-çekme-ram-ve-ilk-hata-grep-ve-awk">Adım 2: Gerçek Veri Çekme (RAM) ve İlk Hata: <code>grep</code> ve <code>awk</code></a></li>
+    <li><a href="#adım-3-ilk-hata---disk-bilgisi-neden-boş-geldi">Adım 3: İlk Hata - Disk Bilgisi Neden Boş Geldi?</a></li>
+    <li><a href="#adım-4-ikinci-hata---orantısız-çıktı-ve-t-tab-tuzağı">Adım 4: İkinci Hata - Orantısız Çıktı ve <code>\t</code> (Tab) Tuzağı</a></li>
+    <li><a href="#adım-5-üçüncü-hata---df--h-gibi-sağ-hizalı-sütunlar">Adım 5: Üçüncü Hata - <code>df -h</code> Gibi Sağ-Hizalı Sütunlar</a></li>
+    <li><a href="#adım-6-dördüncü-hata---performans-ve-hissedilen-yavaşlık">Adım 6: Dördüncü Hata - Performans ve &ldquo;Hissedilen&rdquo; Yavaşlık</a></li>
+    <li><a href="#adım-7-beşinci-hata---terminalde-kalan-artık-metin">Adım 7: Beşinci Hata - Terminalde Kalan &ldquo;Artık&rdquo; Metin</a></li>
+    <li><a href="#sonuç">Sonuç</a></li>
+  </ul>
+</nav>
+        </aside>
+        
+
+        
+        <div class="post-content">
+            <p>Bu harika bir fikir. &ldquo;Linux Bilgi Ekranı&rdquo; projemiz, &ldquo;tutorial hell&quot;den kaçınarak ve hataları adım adım düzelterek (&ldquo;balık tutmayı öğrenerek&rdquo;) nasıl kodlama öğrenileceğine dair mükemmel bir örnek oldu.</p>
+<p>İşte bu süreci, en baştaki <code>echo</code> komutundan <code>printf</code> ile hizalamaya kadar adım adım anlatan, sitenizin yeni blog yazısı.</p>
+<p><code>hugo new posts/bash-script-ile-balik-tutmayi-ogrenmek.md</code> gibi bir dosya oluşturup bu içeriği yapıştırabilirsiniz.</p>
+<hr>
+<p>Kodlama öğrenmeye başladığımda, &ldquo;tutorial hell&rdquo; (eğitim cehennemi) denen tuzağa düşmek istemedim. Oyuncak projeler yerine, gerçek bir problemimi çözecek bir şey arıyordum. CachyOS (Arch Linux) kullanıcısı olarak, sistemimin sağlığını (RAM, Disk, Güncellemeler) görmek için her seferinde 3-4 farklı komut yazmak bir &ldquo;kaşıntıydı&rdquo;.</p>
+<p>Çözüm: Terminalime <code>dash</code> yazdığımda bana tüm bu bilgileri sunan özel bir &ldquo;Bilgi Ekranı&rdquo; script&rsquo;i yazmak.</p>
+<p>Bu, benim &ldquo;balık tutmayı öğrenme&rdquo; sürecimdir. İşte en baştaki koddan en sondaki koda kadar hangi hataları yaptığımız ve nedenlerini düzelttiğimizin tam dökümantasyonu.</p>
+<h2 id="adım-1-en-basit-başlangıç-echo">Adım 1: En Basit Başlangıç (<code>echo</code>)</h2>
+<p>Her şeyden önce, çalıştırılabilir bir dosyaya ihtiyacımız vardı.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 1. Dosyayı oluşturduk</span>
+</span></span><span style="display:flex;"><span>nano dash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. İçine &#39;shebang&#39; (çalıştırma yolu) ve basit bir komut yazdık</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;--- Spirit Notes Sistem Raporu ---&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. Dosyayı çalıştırılabilir yaptık</span>
+</span></span><span style="display:flex;"><span>chmod +x dash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4. Test ettik</span>
+</span></span><span style="display:flex;"><span>./dash
+</span></span></code></pre></div><p><strong>Sonuç:</strong> <code>--- Spirit Notes Sistem Raporu ---</code> yazısını gördük. Başarılı!</p>
+<h2 id="adım-2-gerçek-veri-çekme-ram-ve-ilk-hata-grep-ve-awk">Adım 2: Gerçek Veri Çekme (RAM) ve İlk Hata: <code>grep</code> ve <code>awk</code></h2>
+<p>Şimdi sistemden gerçek veri çekme zamanı. RAM bilgisini <code>free -h</code> komutuyla aldık.</p>
+<p>Bash</p>
+<pre tabindex="0"><code>#!/bin/bash
+# ... (Renk kodlarını ekledik) ...
+
+# free -h çıktısını | (boru) ile grep&#39;e, oradan da awk&#39;a yolladık
+RAM_BILGISI=$(free -h | grep Mem | awk &#39;{print $3 &#34; / &#34; $2}&#39;)
+
+echo -e &#34;${KIRMIZI}RAM KULLANIMI:${SIFIR} \t $RAM_BILGISI&#34;
+</code></pre><p><strong>Balık Nasıl Tutulur? (Bu Kod Neden Çalıştı?)</strong></p>
+<ol>
+<li>
+<p><strong><code>free -h</code></strong>: RAM bilgisini MB/GB (<code>-h</code>) olarak listeler.</p>
+</li>
+<li>
+<p><strong><code>| grep Mem</code></strong>: Çıktıdaki onlarca satır arasından sadece <code>Mem:</code> içeren satırı yakalar.</p>
+</li>
+<li>
+<p><strong><code>| awk '{print $3 &quot; / &quot; $2}'</code></strong>: Gelen tek satırı sütunlara böler (<code>awk</code>). <code>$3</code> (kullanılan) ve <code>$2</code> (toplam) sütunlarını seçip aralarına <code>/</code> koyarak <code>$RAM_BILGISI</code> değişkenine kaydeder.</p>
+</li>
+</ol>
+<h2 id="adım-3-ilk-hata---disk-bilgisi-neden-boş-geldi">Adım 3: İlk Hata - Disk Bilgisi Neden Boş Geldi?</h2>
+<p>RAM için çalışan mantığı disk için (<code>df -h</code>) denedik ve başarısız olduk.</p>
+<p>Bash</p>
+<pre tabindex="0"><code># İLK DENEME (HATALI)
+# Sadece &#39; /&#39; ile biten satırı ara dedik
+DISK_BILGISI=$(df -h | grep &#34; /\\$&#34; | awk &#39;{print $3 &#34; / &#34; $2}&#39;)
+
+# ...
+echo -e &#34;${YESIL}DİSK KULLANIMI:${SIFIR} \t $DISK_BILGISI&#34;
+</code></pre><p><strong>Sonuç:</strong> <code>DİSK KULLANIMI:</code> yazısı geldi ama yanında veri yoktu.</p>
+<p><strong>Balık Nasıl Tutulur? (Neden Başarısız Oldu?)</strong></p>
+<ul>
+<li>
+<p><code>grep &quot; /\\$&quot;</code> komutu, <code>df -h</code> çıktısındaki ana disk (<code>/</code>) satırının <em>tam olarak</em> <code>/</code> ile biteceğini varsayıyordu.</p>
+</li>
+<li>
+<p>Ancak benim CachyOS sistemimde (belki Btrfs veya farklı disk yapısı nedeniyle) bu satır böyle bitmiyordu. <code>grep</code> hiçbir şey bulamadı ve <code>$DISK_BILGISI</code> değişkeni <strong>boş</strong> kaldı.</p>
+</li>
+<li>
+<p><strong>Ders:</strong> <code>grep</code> ile yapılan katı varsayımlar tehlikelidir.</p>
+</li>
+</ul>
+<p>Bash</p>
+<pre tabindex="0"><code># İKİNCİ DENEME (DOĞRU)
+# grep&#39;i attık. awk&#39;a &#34;6. sütunu ($6) tam olarak &#39;/&#39; olan satırı bul&#34; dedik.
+DISK_BILGISI=$(df -h | awk &#39;$6 == &#34;/&#34; {print $3 &#34; / &#34; $2}&#39;)
+</code></pre><p><strong>Sonuç:</strong> Bu çok daha güvenli komut, disk yapım ne olursa olsun doğru satırı buldu ve veriler geldi.</p>
+<h2 id="adım-4-ikinci-hata---orantısız-çıktı-ve-t-tab-tuzağı">Adım 4: İkinci Hata - Orantısız Çıktı ve <code>\t</code> (Tab) Tuzağı</h2>
+<p>Veriler geldi ama hizalı değildi:</p>
+<pre tabindex="0"><code>RAM KULLANIMI: 	 3,0Gi / 9,6Gi
+DİSK KULLANIMI:    34G / 233G
+</code></pre><p><strong>Balık Nasıl Tutulur? (Neden Hizalı Değildi?)</strong></p>
+<ul>
+<li>
+<p><code>echo ... \t ...</code> komutunu kullanmıştım.</p>
+</li>
+<li>
+<p><code>\t</code> (Tab karakteri), &ldquo;8 boşluk ekle&rdquo; demek <strong>değildir</strong>. &ldquo;İmleci bir sonraki 8 karakterlik tab durağına atla&rdquo; demektir.</p>
+</li>
+<li>
+<p><code>RAM KULLANIMI:</code> (15 karakter) ve <code>DİSK KULLANIMI:</code> (16 karakter) farklı uzunlukta oldukları için, tab durağına göre hizalamaları tamamen kaymıştı.</p>
+</li>
+<li>
+<p><strong>Ders:</strong> <code>\t</code> (Tab) ile hizalama yapmak güvenilmezdir.</p>
+</li>
+</ul>
+<p>Çözüm: printf Kullanmak</p>
+<p>echo yerine printf (Formatlı Yazdır) komutuna geçtik.</p>
+<p>Bash</p>
+<pre tabindex="0"><code># printf ile etiketler için 18 karakterlik (%-18s) bir kutu ayırdık
+printf &#34;${KIRMIZI}%-18s${SIFIR} %s\n&#34; &#34;RAM KULLANIMI:&#34; &#34;$RAM_BILGISI&#34;
+printf &#34;${YESIL}%-18s${SIFIR} %s\n&#34; &#34;DİSK KULLANIMI:&#34; &#34;$DISK_BILGISI&#34;
+</code></pre><ul>
+<li>
+<p><code>%-18s</code>: 18 karakterlik, sola dayalı (<code>-</code>) bir metin (<code>s</code>) kutusu oluşturur.</p>
+</li>
+<li>
+<p>Her iki etiket de 18 karakterlik kutulara zorlandığı için, veriler artık dikey olarak hizalanmıştı.</p>
+</li>
+</ul>
+<h2 id="adım-5-üçüncü-hata---df--h-gibi-sağ-hizalı-sütunlar">Adım 5: Üçüncü Hata - <code>df -h</code> Gibi Sağ-Hizalı Sütunlar</h2>
+<p>Hizalamıştık ama <code>df -h</code> komutundaki gibi &ldquo;sağa hizalı&rdquo; sütunlar istiyordum.</p>
+<p><strong>Balık Nasıl Tutulur? (Nasıl Yaptık?)</strong></p>
+<ol>
+<li>
+<p>Verileri ayırdık: <code>$RAM_BILGISI</code> yerine <code>$RAM_KULLANILAN</code> ve <code>$RAM_TOPLAM</code> adında iki ayrı değişken oluşturduk.</p>
+</li>
+<li>
+<p><code>printf</code> formatını 3 sütuna çıkardık:</p>
+</li>
+</ol>
+<p>Bash</p>
+<pre tabindex="0"><code># 1. Verileri ayırdık
+RAM_KULLANILAN=$(free -h | grep Mem | awk &#39;{print $3}&#39;)
+RAM_TOPLAM=$(free -h | grep Mem | awk &#39;{print $2}&#39;)
+#... (Disk için de aynısı) ...
+
+# 2. printf formatını 3 sütuna çıkardık
+# &#34;%-18s&#34; : 18 karakter, Sola dayalı (Etiket)
+# &#34;%10s&#34;  : 10 karakter, SAĞA dayalı (Sayılar)
+printf &#34;${BEYAZ}%-18s %10s %10s${SIFIR}\n&#34; &#34;&#34; &#34;KULLANILAN&#34; &#34;TOPLAM&#34;
+printf &#34;${KIRMIZI}%-18s${SIFIR} %10s %10s\n&#34; &#34;RAM KULLANIMI:&#34; &#34;$RAM_KULLANILAN&#34; &#34;$RAM_TOPLAM&#34;
+printf &#34;${YESIL}%-18s${SIFIR} %10s %10s\n&#34; &#34;DİSK KULLANIMI:&#34; &#34;$DISK_KULLANILAN&#34; &#34;$DISK_TOPLAM&#34;
+</code></pre><ul>
+<li><code>%10s</code> (içinde <code>-</code> olmadan), metni 10 karakterlik bir kutuya <strong>sağa dayalı</strong> olarak yerleştirir. Artık çıktımız <code>df -h</code> gibi profesyonel görünüyordu.</li>
+</ul>
+<h2 id="adım-6-dördüncü-hata---performans-ve-hissedilen-yavaşlık">Adım 6: Dördüncü Hata - Performans ve &ldquo;Hissedilen&rdquo; Yavaşlık</h2>
+<p>Güncelleme ve Çalışma Süresi&rsquo;ni ekledikten sonra script&rsquo;in açılması 1-2 saniye gecikmeye başladı.</p>
+<p>Bash</p>
+<pre tabindex="0"><code># BU KOMUT YAVAŞTI
+GUNCELLEME_SAYISI=$(checkupdates | wc -l || true)
+</code></pre><p><strong>Balık Nasıl Tutulur? (Neden Yavaştı?)</strong></p>
+<ul>
+<li>
+<p><code>checkupdates</code> komutu, paket listesini kontrol etmek için <strong>internete bağlanmak</strong> zorundaydı.</p>
+</li>
+<li>
+<p>Script&rsquo;imiz senkron (sırayla) çalıştığı için, <code>printf</code> komutları ekrana bir şey basmak için bu 2 saniyelik ağ işleminin bitmesini bekliyordu.</p>
+</li>
+</ul>
+<p><strong>Çözüm: Hissedilen Performans Hilesi</strong></p>
+<ol>
+<li>
+<p>Script&rsquo;in sırasını değiştirdik: Önce tüm <strong>hızlı</strong> komutları (RAM, Disk, Uptime) çalıştırdık ve ekrana bastık.</p>
+</li>
+<li>
+<p><strong>Yavaş</strong> olan <code>checkupdates</code> komutunu en sona bıraktık.</p>
+</li>
+<li>
+<p>Kullanıcı beklerken sıkılmasın diye &ldquo;Kontrol ediliyor&hellip;&rdquo; mesajı gösterdik.</p>
+</li>
+</ol>
+<h2 id="adım-7-beşinci-hata---terminalde-kalan-artık-metin">Adım 7: Beşinci Hata - Terminalde Kalan &ldquo;Artık&rdquo; Metin</h2>
+<p>&ldquo;Kontrol ediliyor&hellip;&rdquo; mesajı, gelen &ldquo;0 paket&rdquo; mesajından daha uzundu. Bu yüzden üzerine yazdıktan sonra geride &ldquo;artık&rdquo; karakterler kalıyordu: <code>0 paket ediliyor...</code></p>
+<p><strong>Balık Nasıl Tutulur? (Nasıl Çözdük?)</strong></p>
+<ul>
+<li>
+<p>Sorun, farklı uzunluktaki iki metni üst üste yazmaktı.</p>
+</li>
+<li>
+<p>Çözüm, her iki metni de <code>printf</code> ile <strong>aynı uzunlukta</strong> bir kutuya (<code>%-19s</code>) basmaktı.</p>
+</li>
+</ul>
+<p>Bash</p>
+<pre tabindex="0"><code># 1. Önce &#34;Kontrol ediliyor...&#34; yazısını 19 karakterlik bir kutuya bas (\n YOK)
+printf &#34;${MAVI}%-18s${SIFIR} %-19s&#34; &#34;GÜNCELLEMELER:&#34; &#34;Kontrol ediliyor...&#34;
+
+# 2. YAVAŞ komutu çalıştır
+GUNCELLEME_SAYISI=$(checkupdates | wc -l || true)
+
+# 3. Sonucu da 19 karakterlik bir kutuya bas (\r ile üzerine yaz)
+GUNCELLEME_METNI=&#34;$GUNCELLEME_SAYISI paket&#34;
+# &#34;0 paket&#34; metni, 19 karaktere ulaşmak için sonuna boşluklar eklenerek basılır.
+printf &#34;\r${MAVI}%-18s${SIFIR} %-19s\n&#34; &#34;GÜNCELLEMELER:&#34; &#34;$GUNCELLEME_METNI&#34;
+</code></pre><ul>
+<li>
+<p><code>\r</code> (Satır Başı), imleci satırın başına çeker.</p>
+</li>
+<li>
+<p><code>%-19s</code> komutu, <code>&quot;0 paket&quot;</code> metnini alır ve onu <code>&quot;0 paket &quot;</code> (toplam 19 karakter) haline getirir.</p>
+</li>
+<li>
+<p>Bu yeni 19 karakterlik metin, eski <code>&quot;Kontrol ediliyor...&quot;</code> (19 karakter) metninin üzerine tam olarak yazar ve hiçbir &ldquo;artık&rdquo; bırakmaz.</p>
+</li>
+</ul>
+<h2 id="sonuç">Sonuç</h2>
+<p>Bu basit script projesi, bana <code>grep</code>, <code>awk</code>, <code>sed</code>, <code>printf</code>, <code>\t</code> tuzağı, <code>\r</code> hilesi ve <code>|| true</code> sigortası gibi onlarca temel Linux aracını, herhangi bir &ldquo;tutorial&rdquo; izlemeden, sadece <strong>gerçek bir problemi çözmeye çalışarak</strong> öğretti.</p>
+
+        </div>
+
+    </div>
+    </article>
+
+
+    </main>
+
+    <footer class="site-footer" style="text-align: center; padding: 40px 20px; color: var(--text-secondary); font-size: 0.9em;">
+        
+    </footer>
+
+</body>
+</html>
