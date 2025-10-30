@@ -1,6 +1,6 @@
 +++
 date = '2025-10-30T17:20:45+03:00'
-draft = true
+draft = false
 title = 'Spirit Notes'
 +++
 
