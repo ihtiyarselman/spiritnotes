@@ -6,7 +6,7 @@
 
 	<div class="post-layout">
 
-        {{/* --- Sütun 1: İçindekiler (Mobilde üste gelir) --- */}}
+        {{/* Sütun 1: İçindekiler (Mobilde üste gelir) */}}
         {{ if .TableOfContents }}
         <aside class="toc-container">
             <h3>İçindekiler</h3>
@@ -14,12 +14,13 @@
         </aside>
         {{ end }}
 
-        {{/* --- Sütun 2: Yazı İçeriği (Mobilde alta gelir) --- */}}
+        {{/* Sütun 2: Yazı İçeriği (Mobilde alta gelir) */}}
         <div class="post-content">
             {{ .Content }}
         </div>
 
     </div>
+
     </article>
 
 {{ end }}

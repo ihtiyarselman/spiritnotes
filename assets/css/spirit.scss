@@ -241,22 +241,20 @@ li a {
   }
 
   .post-single .post-layout {
-    /* Sütunları tanımla: Geniş (1fr) ve Dar (300px) */
-    grid-template-columns: 1fr 300px; 
+    display: grid; /* Grid'i sadece masaüstünde etkinleştir */
+
+    /* === YENİ DÜZEN === */
+    /* Sütunları tanımla: Dar (300px) | Geniş (kalan alan) */
+    grid-template-columns: 300px 1fr; 
   }
 
-  /* === YENİ CSS ORDER HİLESİ === */
-
-  .post-content {
-    /* HTML'de 2. sırada olmana rağmen, görsel olarak 1. sütuna git */
-    order: 1;
-  }
+  /* * 'order' hilesine artık gerek kalmadı, çünkü
+   * HTML sıramız (ToC, sonra Content) masaüstü sıramızla (Sol, sonra Sağ) 
+   * zaten aynı!
+   */
 
   .toc-container {
-    /* HTML'de 1. sırada olmana rağmen, görsel olarak 2. sütuna git */
-    order: 2;
-
-    /* Yapışkan (sticky) ayarlar */
+    /* Sadece 'sticky' ayarlarını buraya taşıyoruz */
     position: sticky;
     top: 20px;
     max-height: 90vh;
